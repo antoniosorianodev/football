@@ -11,7 +11,29 @@ let teams = [
 // this is our window.onload function that runs code once the dom is loaded
 window.onload = function () {
     initDropdown();
+
+    // grab our button off the page
+    let theButton = document.querySelector("#theButton");
+
+    // when out button is clicked, call displayFootballTeam
+    theButton.addEventListener("click", displayFootballTeam);
 };
+
+// this function will display the details about our football team
+function displayFootballTeam() {
+
+    // get the dropdown from the page
+    let theDropdown = document.querySelector("#footballSelect");
+
+    // get the index of the selected option in the dropdown
+    let selectedIndex = theDropdown.selectedIndex;
+
+    let selectedTeam = teams[selectedIndex];
+
+    let results = document.querySelector("#results");
+
+    results.innerHTML = `You selected the ${selectedTeam.name} (${selectedTeam.code}) who play in ${selectedTeam.plays}`;
+}
 
 function initDropdown() {
 
