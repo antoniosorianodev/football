@@ -10,6 +10,16 @@ let teams = [
 
 // this is our window.onload function that runs code once the dom is loaded
 window.onload = function () {
+    // load a default option before loading the real teams
+    let theDropdown = document.querySelector("#footballSelect");
+
+    // creating an html element with a specific value and text
+    let defaultOption = document.createElement("option");
+    defaultOption.textContent = "Select a team";
+    defaultOption.value = "";
+
+    theDropdown.appendChild(defaultOption);
+
     initDropdown();
 
     // grab our button off the page
@@ -29,11 +39,17 @@ function displayFootballTeam(event) {
     // get the index of the selected option in the dropdown
     let selectedIndex = theDropdown.selectedIndex;
 
-    let selectedTeam = teams[selectedIndex];
+    // the selected index now needs to be subtracted by 1 because we created a default option
+    let selectedTeam = teams[selectedIndex - 1];
 
     let results = document.querySelector("#results");
 
-    results.innerHTML = `You selected the ${selectedTeam.name} (${selectedTeam.code}) who play in ${selectedTeam.plays}`;
+    // if I have a selected team, show it, if I don't, delete the text on screen
+    if (selectedTeam !== undefined) {
+        results.innerHTML = `You selected the ${selectedTeam.name} (${selectedTeam.code}) who play in ${selectedTeam.plays}`;
+    } else {
+        results.innerHTML = null;
+    }
 
     // I couldn't tell you why this line is here? It's just what the workbook wants?
     return false;
