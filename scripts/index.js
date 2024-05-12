@@ -13,14 +13,15 @@ window.onload = function () {
     initDropdown();
 
     // grab our button off the page
-    let theButton = document.querySelector("#theButton");
+    let theForm = document.querySelector("#footballForm");
 
     // when out button is clicked, call displayFootballTeam
-    theButton.addEventListener("click", displayFootballTeam);
+    theForm.addEventListener("submit", displayFootballTeam);
 };
 
 // this function will display the details about our football team
-function displayFootballTeam() {
+function displayFootballTeam(event) {
+    event.preventDefault();
 
     // get the dropdown from the page
     let theDropdown = document.querySelector("#footballSelect");
@@ -33,6 +34,9 @@ function displayFootballTeam() {
     let results = document.querySelector("#results");
 
     results.innerHTML = `You selected the ${selectedTeam.name} (${selectedTeam.code}) who play in ${selectedTeam.plays}`;
+
+    // I couldn't tell you why this line is here? It's just what the workbook wants?
+    return false;
 }
 
 function initDropdown() {
